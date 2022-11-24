@@ -29,8 +29,31 @@ RSpec.describe UserAccountRepository do
       expect(user_account.username).to eq('mike')
     end
 
+    it "creates a user account" do
+      repo = UserAccountRepository.new
 
+      new_user_account = UserAccount.new
+      new_user_account.email_address = 'danny@danny'
+      new_user_account.username = 'danny'
 
+      repo.create(new_user_account)
 
+      user_accounts = repo.all
+      last_user_account = user_accounts.last
 
+      expect(last_user_account.email_address).to eq('danny@danny')
+
+    end
+
+    it "deletes a user account" do
+      repo = UserAccountRepository.new
+
+      id_to_delete = 1
+
+      repo.delete(id_to_delete)
+
+      all_user_accounts = repo.all
+      expect(all_user_accounts.length).to eq(3)
+      expect(all_user_accounts.first.id).to eq('2')
+    end
 end
