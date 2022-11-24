@@ -20,4 +20,13 @@ RSpec.describe PostRepository do
       expect(posts.length).to eq(4)
       expect(posts.first.post_title).to eq('day one')
     end
+
+    it "returns a single post" do
+      repo = PostRepository.new
+
+      post = repo.find(1)
+      expect(post.post_title).to eq('day one')
+      expect(post.post_content).to eq('Once upon a time...')
+    end
+
   end
