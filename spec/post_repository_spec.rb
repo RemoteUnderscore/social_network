@@ -29,4 +29,27 @@ RSpec.describe PostRepository do
       expect(post.post_content).to eq('Once upon a time...')
     end
 
+    it "creates a new post" do
+    repo = PostRepository.new
+
+    new_post = Post.new
+    new_post.post_title = 'day two'
+    new_post.post_content = 'In a land far, far away...'
+    new_post.post_views = '1'
+    new_post.user_account_id = 1
+
+    repo.create(new_post)
+
+    all_posts = repo.all
+    
+      expect(all_posts).to include(
+        have_attributes(
+          post_title: new_post.post_title,
+          post_content: new_post.post_content,
+          post_views: '1',
+          user_account_id: '1'
+        )
+      )
+  end
+
   end

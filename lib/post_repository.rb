@@ -38,4 +38,13 @@ class PostRepository
 
     return post
   end
+
+  def create(post)
+    sql = 'INSERT INTO posts (post_title, post_content, post_views, user_account_id) VALUES($1, $2, $3, $4);'
+    sql_params = [post.post_title, post.post_content, post.post_views, post.user_account_id]
+
+    DatabaseConnection.exec_params(sql, sql_params)
+
+    return nil
+  end
 end
